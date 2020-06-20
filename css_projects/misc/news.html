@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Listening</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      @font-face {
+          font-family: xiaodou;
+          src: url("font/XiaoDouDaoHeiTangJian-2.ttf");
+      }
+
+      body {
+          /* font-family: xiaodou; */
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+          font-size: 20px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .container {
+        border-top: 1px solid #ccc;
+        width: 300px;
+        margin: 5px auto;
+      }
+
+      .news_title {
+        margin-top: -1px;
+        display: inline-block;
+        border-top: 1px solid red;
+        margin-bottom: 5px;
+      }
+
+      .news_title a {
+        color: black;
+        font-size: 18px;
+      }
+
+      .news_img {
+        box-shadow: 10px 10px 10px rgba(0, 0, 0, .3);
+        margin-top: 10px;
+        height: 150px;
+      }
+
+      .news_img:hover {
+        outline: red dotted 3px;
+      }
+
+      .news_img h4 {
+        margin-top: -35px;
+        padding-left: 15px;
+        color: white;
+      }
+
+      .news_img h4::before {
+          content: '//';
+          padding-right: 5px;
+      }
+
+      .news_list {
+          list-style: none;
+      }
+
+      .news_list li::before {
+          content: '-';
+          color: #dedede;
+          padding-right: 5px;
+      }
+      .news_list li {
+          margin-top: 10px;
+      }
+
+      .news_list a {
+        color: #333333;
+        font-size: 14px;
+      }
+
+      a:hover {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="news_title">
+        <a href="javascript:void(0);">军事</a>
+        <span class="news_dot">.</span>
+        <a href="javascript:void(0);">航空</a>
+      </h2>
+
+      <div class="news_img">
+        <a href="javascript:void(0);">
+          <img src="images/0de9c66ej00qc3lqn002gc000s600e3c.webp" />
+          <h4>美国“忍者导弹”完整残害曝光</h4>
+        </a>
+      </div>
+
+      <ul class="news_list">
+        <li>
+          <a href="javascript:void(0);">西部战区在青藏高原练兵：火力猛烈</a>
+        </li>
+        <li>
+            <a href="javascript:void(0);">直击南部战区演练</a></li>
+        <li>
+          <a href="javascript:void(0);">航拍世界最宽海底沉管隧道首节沉管对接</a>
+        </li>
+        <li>
+            <a href="javascript:void(0);">【彰显中国】飞翔吧，少年</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
