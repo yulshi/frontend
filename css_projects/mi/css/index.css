@@ -54,7 +54,7 @@
   /* height: 148px; */
   height: 0;
   overflow: hidden;
-  transition: height .3s;
+  transition: height 0.3s;
 
   background-color: #fff;
   line-height: 1;
@@ -62,6 +62,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   position: absolute;
   left: -36px;
+  z-index: 900;
 }
 
 /*
@@ -107,9 +108,12 @@
 
 /***** 头部 *********/
 
+.header-wrapper {
+  position: relative;
+}
+
 .header {
   height: 100px;
-  /* background-color: #bfa; */
 }
 
 /***** logo **********/
@@ -144,4 +148,56 @@
 
 .header .logo:hover .logo-mi {
   left: 55px;
+}
+
+/* 设置中间的导航条 */
+.header .nav-wrapper {
+  float: left;
+  margin-left: 7px;
+}
+
+.nav-wrapper li {
+  float: left;
+}
+
+.header .nav {
+  height: 100px;
+  line-height: 100px;
+  padding-left: 58px;
+}
+
+.nav-wrapper li a {
+  display: block;
+  font-size: 16px;
+  margin-right: 20px;
+}
+
+.nav-wrapper li a:hover {
+  color: #ff6700;
+}
+
+.all-goods {
+  visibility: hidden;
+}
+
+/* 显示商品的弹出框 */
+.goods-info {
+  width: 100%;
+  height: 228px;
+  background-color: #fff;
+  /* border-top: 1px solid rgba(224,224,224);
+  box-shadow: 0 3px 3px rgba(0,0,0,.2); */
+  position: absolute;
+  z-index: 899;
+  top: 100px;
+  left: 0;
+  height: 0;
+  transition: height 0.3s;
+}
+
+.nav .show-goods:hover ~ .goods-info,
+.goods-info:hover {
+  height: 228px;
+  border-top: 1px solid rgba(224, 224, 224);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
 }
