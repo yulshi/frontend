@@ -49,9 +49,13 @@
 }
 
 .app-download .qrcode {
-  display: none;
+  /* display: none; */
   width: 124px;
-  height: 148px;
+  /* height: 148px; */
+  height: 0;
+  overflow: hidden;
+  transition: height .3s;
+
   background-color: #fff;
   line-height: 1;
   text-align: center;
@@ -63,9 +67,11 @@
 /*
   当鼠标移入<a>标签时，显示上三角和qrcode
 */
-.app-download:hover::after,
+.app-download:hover::after {
+  display: block;
+}
 .app-download:hover .qrcode {
-    display: block;
+  height: 148px;
 }
 
 .app-download .qrcode img {
