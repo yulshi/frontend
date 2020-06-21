@@ -378,3 +378,94 @@
   right: 50%;
   margin-right: -639px;
 }
+
+/**
+  设置广告区域
+*/
+.ads {
+  margin-top: 14px;
+  height: 170px;
+}
+
+.ads .ad-shortcut,
+.ads .ad-imgs,
+.ads li {
+  float: left;
+}
+
+.ads .ad-shortcut {
+  width: 228px;
+  height: 168px;
+  background-color: #5f5750;
+  margin-right: 14px;
+  padding-top: 2px;
+  padding-left: 6px;
+}
+
+.ads .ad-shortcut li {
+  position: relative;
+}
+
+.ads .ad-shortcut li::before {
+  content: '';
+  position: absolute;
+  width: 64px;
+  height: 1px;
+  background-color: #665e57;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.ads .ad-shortcut li::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 70px;
+  background-color: #665e57;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto 0;
+}
+
+.ads .ad-shortcut a {
+  color: #cfccca;
+  display: block;
+  height: 84px;
+  width: 76px;
+  text-align: center;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+.ads .ad-shortcut a:hover {
+  color: #fff;
+}
+
+.ads .ad-shortcut i {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+
+.ads .ad-imgs li {
+  width: 316px;
+  margin-right: 14px;
+}
+
+.ads .ad-imgs li:first-child {
+  margin-left: 2px;
+}
+
+.ads .ad-imgs li:last-child {
+  margin-right: 0;
+}
+
+.ads .ad-imgs img {
+  width: 100%;
+  vertical-align: top;
+}
+
