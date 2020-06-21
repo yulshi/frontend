@@ -361,3 +361,20 @@
   background-position: -42px;
 }
 
+/**
+右侧工具条 
+  为了让工具条固定在右侧的某个位置，方式为：
+    - right设为百分比
+    - margin-right设为负值
+  原理：利用水平布局的等式
+    left + 盒子的7个值 + right = 视口的宽度
+*/
+.right-side-toolbar {
+  width: 26px;
+  height: 206px;
+  background-color: #bfa;
+  position: fixed;
+  bottom: 60px;
+  right: 50%;
+  margin-right: -639px;
+}
