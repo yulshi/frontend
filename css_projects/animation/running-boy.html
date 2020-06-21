@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奔跑的少年</title>
+
+    <style>
+        @keyframes running_boy {
+            from {
+                background-position: 1536px 0;
+            }
+
+            to {
+                background-position: 0 0;
+            }
+        }
+
+        .boy {
+            width: 256px;
+            height: 256px;
+            background-image: url("img/boy.png");
+            animation: running_boy steps(6) .8s infinite;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="boy"></div>
+
+</body>
+
+</html>
