@@ -1,0 +1,150 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+@viewport-width: 750;
+
+html {
+  font-size: 100vw / @viewport-width * 40;
+  background-color: #eff0f4;
+}
+
+.w {
+  width: 693/40rem;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+.topbar:extend(.w) {
+  display: flex;
+  height: 175 / 40rem;
+  line-height: 175 / 40rem;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    color: #24253d;
+    font-size: 50/40rem;
+
+    i {
+      font-size: 40/40rem;
+      color: #999;
+    }
+  }
+}
+
+.banner:extend(.w) {
+  img {
+    width: 100%;
+  }
+}
+
+.menu:extend(.w) {
+  height: 329/40rem;
+  //   background-color: #bfa;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-content: space-evenly;
+
+  a {
+    width: 327/40rem;
+    height: 104/40rem;
+    color: white;
+    border-radius: 10/40rem;
+    line-height: 104/40rem;
+
+    i {
+      margin: 0 25/40rem 0 38/40rem;
+    }
+  }
+
+  .course {
+    background-color: #f97053;
+  }
+  .star {
+    background-color: #cd6efe;
+  }
+  .subscribe {
+    background-color: #fe4479;
+  }
+  .download {
+    background-color: #1bc4fb;
+  }
+}
+
+.course-list:extend(.w) {
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 30/40rem 0;
+
+    h2 {
+      font-size: 33/40rem;
+      color: #24253d;
+      border-left: 2px solid #3a84ff;
+      padding-left: 4px;
+    }
+
+    .more {
+      font-size: 28/40rem;
+      color: #656565;
+    }
+  }
+
+  .item-list {
+
+    overflow: auto;
+
+    display: flex;
+
+    .item {
+      flex: none;
+      padding: 22/40rem;
+      box-sizing: border-box;
+      width: 330/40rem;
+      height: 324/40rem;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+
+      margin-right: 20/40rem;
+
+      display: flex;
+      flex-flow: column;
+      justify-content: space-between;
+
+      img {
+        width: 100%;
+        vertical-align: top;
+      }
+
+      h3 {
+        font-size: 32/40rem;
+        color: #24253d;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        .avatar {
+          width: 42/40rem;
+          height: 42/40rem;
+        }
+
+        .nickname {
+          font-size: 24/40rem;
+          color: #969393;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}

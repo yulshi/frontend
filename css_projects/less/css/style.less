@@ -1,0 +1,21 @@
+
+@mycolor: #bfa;
+
+body {
+    width: 500px;
+    height: 500px;
+    border: 1px solid red;
+    background-color: @mycolor;
+
+    &:hover {
+        background-color: darken(@mycolor, 10%);
+    }
+
+    &:last-child {
+        color: red;
+    }
+}
+.container {
+    width: 100px;
+    height: $width;
+}
