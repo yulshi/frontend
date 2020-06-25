@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            const items = document.getElementsByName("items");
+
+            const selectAll = document.getElementById("select-all");
+            selectAll.onclick = function () {
+                for (let i = 0; i < items.length; i++) {
+                    items[i].checked = true;
+                }
+            }
+
+            const unselectAll = document.getElementById("unselect-all");
+            unselectAll.onclick = function () {
+                for (let i = 0; i < items.length; i++) {
+                    items[i].checked = false;
+                }
+            }
+
+            const reverseSelect = document.getElementById("select-reverse");
+            reverseSelect.onclick = function () {
+                for (let i = 0; i < items.length; i++) {
+                    items[i].checked = !items[i].checked;
+                }
+            }
+
+            const submit = document.getElementById("submit");
+            submit.onclick = function () {
+                const selected = [];
+                for (let i = 0; i < items.length; i++) {
+                    items[i].checked && (selected[selected.length] = items[i].value);
+                }
+                alert(selected.join(" "));
+            }
+
+            const selectAllOrNone = document.getElementById("checkedAllBoxes");
+            selectAllOrNone.onclick = function (e) {
+                for (let i = 0; i < items.length; i++) {
+                    items[i].checked = this.checked;
+                }
+            }
+
+            for (let i = 0; i < items.length; i++) {
+                items[i].onclick = function() {
+                    for (let i = 0; i < items.length; i++) {
+                        if(!items[i].checked) {
+                            selectAllOrNone.checked = false;
+                            return;
+                        }
+                    }
+                    selectAllOrNone.checked = true;
+                    
+                }
+            }
+
+        }
+
+
+
+    </script>
+</head>
+
+<body>
+
+    <form action="#" method="post">
+        <div>
+            <input type="checkbox" name="checkedAllBoxes" id="checkedAllBoxes" value="checkAllOrNone">全选/全不选
+        </div>
+        <div>
+            <input type="checkbox" name="items" value="basketball">篮球
+            <input type="checkbox" name="items" value="football">足球
+            <input type="checkbox" name="items" value="paiball">排球
+            <input type="checkbox" name="items" value="badminton">羽毛球
+        </div>
+        <div>
+            <button type="button" id="select-all">全选</button>
+            <button type="button" id="unselect-all">全不选</button>
+            <button type="button" id="select-reverse">反选</button>
+            <button type="button" id="submit">提交</button>
+        </div>
+    </form>
+
+</body>
+
+</html>

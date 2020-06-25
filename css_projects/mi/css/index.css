@@ -295,7 +295,11 @@
   z-index: 555;
 }
 
-.banner li:nth-child(5) {
+/* .banner li:nth-child(5) {
+  z-index: 556;
+} */
+
+.banner li.active {
   z-index: 556;
 }
 

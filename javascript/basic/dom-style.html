@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box1 {
+      margin: 30px 0;
+      width: 100px;
+      height: 100px;
+      background-color: #bfa;
+      transition: 1s;
+    }
+  </style>
+  <script type="text/javascript">
+
+    function getStyle(obj, name) {
+      if(window.getComputedStyle) {
+        return getComputedStyle(obj)[name];
+      } else {
+        return obj.currentStyle[name];
+      }
+    }
+
+    window.onload = function () {
+
+      const btn = document.getElementById("btn");
+      btn.onclick = function () {
+        const box1 = document.querySelector(".box1");
+
+        let originWidth = getStyle(box1, "width");
+        console.log(originWidth);
+        box1.style.width = parseInt(originWidth) * 1.5 + "px";
+      }
+
+    }
+
+  </script>
+</head>
+
+<body>
+  <button id="btn">Click Me</button>
+  <div class="box1"></div>
+</body>
+
+</html>
