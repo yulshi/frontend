@@ -45,55 +45,6 @@
 
     }
 
-    /**
-     * 拖拽指定的元素
-     */
-    function drag(target) {
-
-      target.onmousedown = function (e) {
-
-        e = e || window.event;
-
-        // for IE8，强制捕获
-        target.setCapture && target.setCapture();
-
-        const diffLeft = e.clientX - this.offsetLeft + getScrollLeft();
-        const diffTop = e.clientY - this.offsetTop + getScrollTop();
-
-        const originCursor = getStyle(this, "cursor");
-        this.style.cursor = "grab";
-
-        document.onmousemove = function (e) {
-          e = e || window.event;
-          const left = e.clientX;
-          const top = e.clientY;
-
-          target.style.left = (left - diffLeft + getScrollLeft()) + "px";
-          target.style.top = (top - diffTop + getScrollTop()) + "px";
-        }
-
-        document.onmouseup = function (e) {
-          e = e || window.event;
-          document.onmousemove = null;
-          document.onmouseup = null;
-          target.style.cursor = originCursor;
-          // for IE8, 释放捕获
-          target.releaseCapture && target.releaseCapture();
-        }
-
-        /**
-         * 当我们拖拽网页中的内容时，浏览器默认会去搜素引擎中搜索内容
-         * 如果不想要这种效果，可以通过return false来取消默认行为
-         * 
-         * 但是这种方法对IE8不起作用
-         */
-        return false;
-
-      }
-
-
-    }
-
   </script>
 </head>
 

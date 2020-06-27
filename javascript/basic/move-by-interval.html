@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #box1 {
+      width: 100px;
+      height: 100px;
+      background-color: #f00;
+      position: absolute;
+      left: 0;
+      top: 40px;
+    }
+
+    #box2 {
+      width: 100px;
+      height: 100px;
+      background-color: yellowgreen;
+      position: absolute;
+      left: 0;
+      top: 200px;
+    }
+  </style>
+  
+  <script type="text/javascript" src="../common/tools.js"></script>
+
+  <script type="text/javascript">
+    window.onload = function() {
+
+      const btn = document.getElementById('btn1');
+      const box1 = document.getElementById('box1');
+      const box2 = document.getElementById('box2');
+
+      btn.onclick = function() {
+        move(box1, "width", 500, 10, ()=> {
+          move(box1, "height", 300, 10);
+        });
+        // move(box1, "left", 500, 10);
+      }
+
+    }
+  </script>
+
+</head>
+<body>
+  <button id="btn1">test</button>
+  <div id="box1"></div>
+  <div id="box2"></div>
+</body>
+</html>
