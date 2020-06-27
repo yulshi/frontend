@@ -20,18 +20,15 @@
 
     window.onload = function () {
 
-      const box1 = document.getElementById("box1");
+      let step = 10;
+      let directionCode = 0;
 
-      document.onkeydown = function (e) {
-
-        e = e || window.event;
-
-        let step = 10;
-        if (e.altKey) {
-          step = 50;
-        }
-
-        switch (e.keyCode) {
+      /**
+       * 让定时器控制速度，该定时器一直处于运行状态，根据
+       * 方向值决定怎么走
+       */
+      const timer = setInterval(function () {
+        switch (directionCode) {
           case 37:
             box1.style.left = box1.offsetLeft - step + "px";
             break;
@@ -45,7 +42,32 @@
             box1.style.top = box1.offsetTop + step + "px";
             break;
         }
+      }, 20);
 
+      const box1 = document.getElementById("box1");
+
+      /**
+       * 当键盘按下时，修改方向值
+       */
+      document.onkeydown = function (e) {
+
+        e = e || window.event;
+
+        if (e.altKey) {
+          step = 50;
+        } else {
+          step = 10;
+        }
+
+        directionCode = e.keyCode;
+
+      }
+
+      /**
+       * 当键盘松开时，方向值为0，表示不想任何方向移动
+       */
+      document.onkeyup = function (e) {
+        directionCode = 0;
       }
 
     }
