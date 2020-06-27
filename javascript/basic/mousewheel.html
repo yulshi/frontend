@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="text/javascript" src="../common/tools.js"></script>
+  <style>
+    body {
+      height: 2000px;
+    }
+    #box1 {
+      width: 100px;
+      height: 100px;
+      background-color: #f00;
+    }
+  </style>
+  <script type="text/javascript">
+
+    window.onload = function () {
+
+      const box1 = document.getElementById("box1");
+
+      box1.onmousewheel = function (e) {
+        e = e || window.event;
+
+        this.style.height = parseInt(getStyle(this, "height")) + e.wheelDelta + "px";
+
+        // 对于firefox，使用e.detail获取滚轮距离，并且它的方向与其他浏览器相反
+        this.style.height = parseInt(getStyle(this, "height")) - e.detail + "px";
+
+
+        /*
+         * 当滚轮滚动时，如果浏览器有滚动条，滚动条会随之滚动
+         * 这是浏览器的默认行为，如果想取消默认行为可以return false
+         * 
+         * 但是这种方法对于使用addEventListener方式绑定的事件，不起作用，因此需要
+         * 使用event.preventDefault来取消默认行为
+         */
+        e.preventDefault && e.preventDefault();
+        return false;
+
+      }
+
+      // 对于firefox，必须使用如下的方式绑定滚轮事件
+      bind(box1, "DOMMouseScroll", box1.onmousewheel);
+
+    }
+
+  </script>
+</head>
+
+<body>
+  <div id="box1"></div>
+</body>
+
+</html>
