@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>轮播图</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    #outer {
+      width: 520px;
+      height: 400px;
+      margin: 50px auto;
+      background-color: greenyellow;
+      padding: 10px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #img-list {
+      /* width: 2600px; */
+      position: absolute;
+      left: 0;
+      /* 可以使用transition达到动画的效果 */
+      /* transition: left 1s; */
+    }
+
+    #img-list li {
+      float: left;
+      margin: 0 10px;
+    }
+
+    #img-list img {
+      width: 500px;
+      vertical-align: top;
+    }
+
+    #img-nav {
+      position: absolute;
+      z-index: 666;
+      bottom: 20px;
+      left: 0;
+    }
+
+    #img-nav a {
+      float: left;
+      width: 15px;
+      height: 15px;
+      background-color: #f00;
+      margin: 0 5px;
+      opacity: .5;
+      /* 兼容IE */
+      filter: alpha(opacity=50);
+    }
+
+    #img-nav a:hover {
+      background-color: #000;
+    }
+  </style>
+  <script type="text/javascript" src="../common/tools.js"></script>
+  <script type="text/javascript">
+
+    window.onload = function () {
+
+      let timer;
+
+      // 设置img-list的宽度
+      const imgList = document.getElementById("img-list");
+
+      const imgArr = document.getElementsByTagName("img");
+      imgList.style.width = 520 * imgArr.length + "px";
+
+      // 设置导航条居中
+      const imgNav = document.getElementById("img-nav");
+      const outer = document.getElementById("outer");
+      imgNav.style.left = Math.floor((outer.offsetWidth - imgNav.offsetWidth) / 2) + "px";
+
+      let index = 0;
+      const allA = document.getElementsByTagName("a");
+      allA[index].style.backgroundColor = "#000";
+
+      for (let i = 0; i < allA.length; i++) {
+
+        allA[i].num = i;
+
+        allA[i].onclick = function () {
+
+          clearInterval(timer);
+
+          index = this.num;
+          // 切换图片
+          /* 如果使用CSS的transition得到动画效果，可以使用下面这行代码实现 */
+          // imgList.style.left = index * (-520) + "px";
+          setA();
+
+          // 如果想使用JS达到动画效果可以是用下面这行代码 */
+          move(imgList, "left", -520 * index, 30, function () {
+            autoChange();
+          });
+
+        }
+      }
+
+      // 自动切换图片
+      autoChange();
+
+      function setA() {
+
+        if (index >= imgArr.length - 1) {
+          index = 0;
+          imgList.style.left = 0;
+        }
+
+        for (let i = 0; i < allA.length; i++) {
+          allA[i].style.backgroundColor = "";
+        }
+        allA[index].style.backgroundColor = "#000";
+      }
+
+
+      function autoChange() {
+
+        timer = setInterval(function () {
+
+          index++;
+          index %= imgArr.length;
+
+          // imgList.style.left = index * (-520) + "px";
+          // setA();
+          move(imgList, "left", -520 * index, 30, function () {
+            setA();
+          });
+
+        }, 2000);
+
+      }
+
+    }
+  </script>
+</head>
+
+<body>
+  <div id="outer">
+    <ul id="img-list">
+      <li><img src="../../css_projects/misc/images/loop1.webp" alt=""></li>
+      <li><img src="../../css_projects/misc/images/loop2.webp" alt=""></li>
+      <li><img src="../../css_projects/misc/images/loop3.webp" alt=""></li>
+      <li><img src="../../css_projects/misc/images/loop4.webp" alt=""></li>
+      <li><img src="../../css_projects/misc/images/loop5.webp" alt=""></li>
+      <li><img src="../../css_projects/misc/images/loop1.webp" alt=""></li>
+    </ul>
+    <div id="img-nav">
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+    </div>
+  </div>
+</body>
+
+</html>
