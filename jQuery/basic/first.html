@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Firs jQuery page</title>
+    <style>
+        #content {
+            width: 100%;
+            border: 1px solid grey;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        #content tr {
+            height: 40px;
+        }
+
+        #content tbody tr:nth-of-type(even) {
+            background-color: lightblue;
+        }
+        
+        #content tbody tr:hover {
+            background-color: yellowgreen;
+        }
+
+        #content th {
+            background-color: lightgray;
+        }
+
+        #content th,
+        #content td{
+            padding: 0 5px;
+            border: 1px solid grey;
+            vertical-align: middle;
+        }
+    </style>
+    <script type="text/javascript" src="../../libs/jQuery/jquery-3.5.1.js"></script>
+    <!--    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>-->
+    <script type="text/javascript">
+
+        $(function () {
+            $("#btn01").click(function () {
+                // $('input').each(function (i, item) {
+                //     console.log(i, this);
+                // });
+                console.log($("input[name='name']").index());
+            });
+
+            // $("tr:odd").css("backgroundColor", "lightgrey");
+            $.parseHTML()
+        });
+
+    </script>
+</head>
+<body>
+
+<div>
+    <input type="text" name="name">
+    <input type="text" name="gender">
+</div>
+<button id="btn01">click</button>
+
+<div class="box">
+    <table id="content">
+        <thead>
+        <tr>
+            <th>No.</th><th>English</th>
+        </tr>
+        </thead>
+        <tr><td>1</td><td>One</td></tr>
+        <tr><td>2</td><td>Tow</td></tr>
+        <tr><td>3</td><td>Three</td></tr>
+        <tr><td>4</td><td>Four</td></tr>
+        <tr><td>5</td><td>Five</td></tr>
+    </table>
+</div>
+</body>
+</html>

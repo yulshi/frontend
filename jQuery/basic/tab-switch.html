@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tab Swtich</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .tab-title {
+            /*background-color: #bfa;*/
+            height: 40px;
+            margin: 10px 0 0 50px;
+        }
+
+        .tab-title li {
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .tab-title li:first-child {
+            background-color: yellowgreen;
+        }
+
+        .tab-title li:nth-of-type(2) {
+            background-color: greenyellow;
+        }
+
+        .tab-title li:nth-of-type(3) {
+            background-color: lightblue;
+        }
+
+        .tab-content-wrapper {
+            background-color: #fba;
+            position: relative;
+        }
+
+        .tab-content-wrapper .tab-content {
+            position: absolute;
+            width: 500px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+        }
+
+        .tab-content-wrapper .tab-content:first-of-type {
+            background-color: yellowgreen;
+        }
+
+        .tab-content-wrapper .tab-content:nth-of-type(2) {
+            background-color: greenyellow;
+            display: none;
+        }
+
+        .tab-content-wrapper .tab-content:nth-of-type(3) {
+            background-color: lightblue;
+            display: none;
+        }
+
+    </style>
+    <script type="text/javascript" src="../../libs/jQuery/jquery-3.5.1.js"></script>
+    <!--    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>-->
+    <script type="text/javascript">
+
+        $(function () {
+
+            let currentDisplayIndex = 0;
+
+            $(".tab-title>li").click(function () {
+
+                $(".tab-content")[currentDisplayIndex].style.display = "none";
+
+                const index = $(this).index();
+                $(".tab-content")[index].style.display = "block";
+
+                currentDisplayIndex = index;
+
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+
+<div id="tab-wrapper">
+    <ul class="tab-title">
+        <li>tab1</li>
+        <li>tab2</li>
+        <li>tab3</li>
+    </ul>
+    <div class="tab-content-wrapper">
+        <div class="tab-content">
+            tab1 content1
+        </div>
+        <div class="tab-content">
+            tab1 content2
+        </div>
+        <div class="tab-content">
+            tab1 content3
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
