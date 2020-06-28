@@ -134,3 +134,33 @@ function move(target, attr, destination, step, callback) {
     }
   }, 30);
 }
+
+function addClass(target, className) {
+  if (!hasClass(target, className)) {
+    target.className += " " + className;
+  }
+}
+
+function hasClass(target, className) {
+  const reg = new RegExp("\\b" + className + +"\\b");
+  return reg.test(className);
+}
+
+function removeClass(target, className) {
+  const reg = new RegExp("\\b" + className + +"\\b");
+  target.className = target.className.replace(reg, "");
+}
+
+/**
+ * 如果有className则删除，如果没有则加上className
+ * 
+ * @param target 
+ * @param className 
+ */
+function toggleClass(target, className) {
+  if(hasClass(target, className)) {
+    removeClass(target, className);
+  } else {
+    addClass(target, className);
+  }
+}
