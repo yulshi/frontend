@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body {
+        height: 5000px;
+    }
+
+    #back-to-top {
+        width: 100px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+        background-color: #bfa;
+        position: fixed;
+        top: 500px;
+        right: 20px;
+        cursor: pointer;
+        color: #665e57;
+        transition: background-color .2s;
+    }
+
+    #back-to-top:hover {
+        background-color: #fba;
+    }
+</style>
+<script type="text/javascript" src="../../libs/jQuery/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#back-to-top").click(function () {
+            // 瞬间移动到顶部
+            // $("html,body").scrollTop(0);
+
+            // 平滑地移动到顶部
+            let distance = $(document.documentElement).scrollTop() + $(document.body).scrollTop();
+            const totalTime = 500;
+            const interval = 10;
+
+            const itemDistance = distance / (totalTime / interval);
+
+            const timer = setInterval(function () {
+                distance -= itemDistance;
+                if (distance <= 0) {
+                    distance = 0;
+                    clearInterval(timer);
+                }
+                $("html,body").scrollTop(distance);
+            }, interval)
+
+        });
+    })
+</script>
+<body>
+
+<div id="back-to-top">back to top</div>
+</body>
+</html>
