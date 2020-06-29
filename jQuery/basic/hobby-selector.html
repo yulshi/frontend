@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="text/javascript" src="../../libs/jQuery/jquery-3.5.1.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            const $checkedAllBoxes = $("#checkedAllBoxes");
+            const $items = $(":checkbox[name=items]");
+
+            $('#select-all').click(function () {
+                $items.prop("checked", true);
+                $checkedAllBoxes.prop("checked", true);
+            });
+
+            $("#unselect-all").click(function () {
+                $items.prop("checked", false);
+                $checkedAllBoxes.prop("checked", false);
+            });
+
+            $("#select-reverse").click(function () {
+                $items.each(function() {
+                    this.checked = !this.checked;
+                })
+                const allSelected = $items.not(":checked").length === 0;
+                $checkedAllBoxes.prop("checked", allSelected);
+            });
+
+            $("#submit").click(function () {
+                const arr = [];
+                $items.filter(":checked").each(function () {
+                    arr[arr.length] = this.value;
+                });
+                alert(arr);
+            });
+
+            $checkedAllBoxes.click(function () {
+                $items.prop("checked", this.checked);
+            });
+
+            $items.click(function () {
+                $checkedAllBoxes.prop("checked", $items.not(":checked").length === 0);
+            });
+
+        });
+    </script>
+
+</head>
+<body>
+
+<form action="#" method="post">
+    <div>
+        <input type="checkbox" name="checkedAllBoxes" id="checkedAllBoxes" value="checkAllOrNone">全选/全不选
+    </div>
+    <div>
+        <input type="checkbox" name="items" value="basketball">篮球
+        <input type="checkbox" name="items" value="football">足球
+        <input type="checkbox" name="items" value="paiball">排球
+        <input type="checkbox" name="items" value="badminton">羽毛球
+    </div>
+    <div>
+        <button type="button" id="select-all">全选</button>
+        <button type="button" id="unselect-all">全不选</button>
+        <button type="button" id="select-reverse">反选</button>
+        <button type="button" id="submit">提交</button>
+    </div>
+</form>
+
+</body>
+</html>
