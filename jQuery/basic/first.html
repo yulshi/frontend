@@ -39,7 +39,11 @@
     <script type="text/javascript">
 
         $(function () {
-            $("table>tbody>tr:first").css("background-color", "red");
+
+            $tbody = $("table>tbody");
+
+            // $tbody.prepend("<tr><td>xx</td><td>yyy</td></tr>");
+            // $("<tr><td>xx</td><td>yyy</td></tr>").prependTo($tbody);
         });
 
     </script>

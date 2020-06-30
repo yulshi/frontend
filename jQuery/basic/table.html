@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table's operation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #emp-records {
+            border-collapse: collapse;
+            margin: 40px auto;
+            width: 500px;
+        }
+
+        #emp-records thead {
+            background-color: #bfa;
+        }
+
+        #emp-records td {
+            line-height: 40px;
+            border: 1px solid #665e57;
+            padding: 0 10px;
+        }
+
+        #emp-records tbody td:last-child {
+            text-align: center;
+        }
+
+        form {
+            margin: 10px auto;
+            border: 1px solid #665e57;
+            width: 300px;
+        }
+
+        form h3 {
+            background-color: #bfa;
+            padding: 10px;
+            border-bottom: 1px solid #665e57;
+        }
+
+        .emp-input {
+            display: flex;
+            flex-flow: column;
+            padding: 10px;
+        }
+
+        .input-row {
+            display: flex;
+            flex-flow: row;
+            margin: 6px 0;
+        }
+
+        .emp-input span {
+            width: 60px;
+        }
+
+        .emp-input input {
+            width: 200px;
+        }
+
+        .emp-input button {
+            width: 100px;
+            align-self: center;
+            margin: 10px 0;
+        }
+
+    </style>
+    <script type="text/javascript" src="../../libs/jQuery/jquery-3.5.1.js"></script>
+</head>
+<body>
+<form action="#" method="post">
+    <h3>Add new employee</h3>
+    <div class="emp-input">
+        <label class="input-row">
+            <span>name</span>
+            <input type="text" name="name">
+        </label>
+        <label class="input-row">
+            <span>E-Mail</span>
+            <input type="text" name="email">
+        </label>
+        <label class="input-row">
+            <span>Salary</span>
+            <input type="text" name="salary">
+        </label>
+        <button name="submit">
+            Submit
+        </button>
+    </div>
+</form>
+<hr/>
+<table id="emp-records">
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>E-Mail</td>
+        <td>Salary</td>
+        <td>Operation</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Tom</td>
+        <td>tom@example.com</td>
+        <td>5000</td>
+        <td><a href="javascript:;">delete</a></td>
+    </tr>
+    <tr>
+        <td>Jimmy</td>
+        <td>jimmy@example.com</td>
+        <td>50000</td>
+        <td><a href="javascript:;">delete</a></td>
+    </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+
+    const $table = $('#emp-records>tbody');
+
+    // add employee
+    $(':button[name=submit]').click(function () {
+
+        const name = $(':input[name=name]').val();
+        const email = $(':input[name=email]').val();
+        const salary = $(':input[name=salary]').val();
+
+        // $table.append(
+        //     `<tr><td>${name}</td><td>${email}</td><td>${salary}</td><td><a href="#">delete</a></td>`
+        // );
+
+        // $(`<tr><td>${name}</td><td>${email}</td><td>${salary}</td><td><a href="#">delete</a></td>`)
+        //     .appendTo($table);
+
+        // 添加新的<tr>元素
+        $('<tr></tr>')
+            .append('<td>' + name + '</td>')
+            .append('<td>' + email + '</td>')
+            .append('<td>' + salary + '</td>')
+            .append('<td><a href="javascript:;">delete</a></td>')
+            .appendTo($table)
+            .find('a').click(deleteEmployee);
+
+        $(':input').val('');
+
+        return false;
+    });
+
+    // delete employee
+    $table.find('a').click(deleteEmployee);
+
+    function deleteEmployee() {
+        const $tr = $(this).parent().parent();
+        const name = $tr.children().first().html();
+        if (confirm("Do you really want to delete " + name + "?")) {
+            $tr.remove();
+        }
+        return false;
+    }
+
+</script>
+</body>
+</html>
