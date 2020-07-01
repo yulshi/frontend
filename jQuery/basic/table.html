@@ -135,30 +135,54 @@
         //     .appendTo($table);
 
         // 添加新的<tr>元素
-        $('<tr></tr>')
+        const $tr = $('<tr></tr>')
             .append('<td>' + name + '</td>')
             .append('<td>' + email + '</td>')
             .append('<td>' + salary + '</td>')
             .append('<td><a href="javascript:;">delete</a></td>')
-            .appendTo($table)
-            .find('a').click(deleteEmployee);
+            .appendTo($table);
+
+        // 不使用事件委派的情况下，需要为新添加的元素添加事件
+        // $tr.find('a').click(deleteEmployee);
 
         $(':input').val('');
 
         return false;
     });
 
-    // delete employee
-    $table.find('a').click(deleteEmployee);
+    /**
+     * 不使用事件委派，为所有<a>绑定事件
+     */
+    // $table.find('a').click(deleteEmployee);
+    //
+    // function deleteEmployee() {
+    //     const $tr = $(this).parent().parent();
+    //     const name = $tr.children().first().html();
+    //     if (confirm("Do you really want to delete " + name + "?")) {
+    //         $tr.remove();
+    //     }
+    //     return false;
+    // }
 
-    function deleteEmployee() {
+    /**
+     * 使用事件委派的方式为所有现有的以及新加的元素添加删除事件
+     */
+    // $table.delegate('a', 'click', function () {
+    //     const $tr = $(this).parent().parent();
+    //     const name = $tr.children().first().html();
+    //     if (confirm("Do you really want to delete " + name + "?")) {
+    //         $tr.remove();
+    //     }
+    //     return false;
+    // });
+    $table.on('click', 'a', function () {
         const $tr = $(this).parent().parent();
         const name = $tr.children().first().html();
         if (confirm("Do you really want to delete " + name + "?")) {
             $tr.remove();
         }
         return false;
-    }
+    });
 
 </script>
 </body>
