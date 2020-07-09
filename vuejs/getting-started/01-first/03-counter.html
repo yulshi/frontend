@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <h2>当前计数：{{counter}}</h2>
+  <!--    <button v-on:click="counter++">+</button>-->
+  <!--    <button v-on:click="counter--">-</button>-->
+  <!--    <button v-on:click="increment">+</button>-->
+  <!--    <button v-on:click="decrement">-</button>-->
+  <button @click="increment">+</button>
+  <button @click="decrement">-</button>
+</div>
+
+<script type="text/javascript" src="../libs/vue.js"></script>
+<script type="text/javascript">
+  const app = new Vue({
+    el: '#app', // 用于挂载要管理的元素
+    data: { // 定义一些数据
+      counter: 0
+    },
+    methods: {
+      increment: function () {
+        console.log("incremented by 1");
+        this.counter++;
+      },
+      decrement: function () {
+        console.log("decrement by 1");
+        this.counter--;
+      }
+    }
+  });
+</script>
+</body>
+</html>
