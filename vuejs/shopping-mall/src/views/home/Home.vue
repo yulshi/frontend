@@ -20,6 +20,15 @@
 
   export default {
     name: "Home",
+    data() {
+      return {
+        goods: {
+          popular: {page: 0, list: []},
+          brandnew: {page: 0, list: []},
+          feature: {page: 0, list: []}
+        }
+      }
+    },
     components: {
       TabControl,
       NavBar,
@@ -29,7 +38,7 @@
     },
     methods: {
       tabControlClick(index) {
-        console.log("the selected tab-control index is" , index);
+        console.log("the selected tab-control index is", index);
       }
     }
   }
@@ -40,6 +49,7 @@
     margin-bottom: 60px;
     margin-top: 44px
   }
+
   .home-navbar {
     background-color: var(--color-tint);
     color: #ffffff;
