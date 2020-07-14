@@ -16,18 +16,44 @@
         scroll: null
       }
     },
+    props: {
+      monitorScroll: {
+        type: Boolean,
+        default: false
+      },
+      pullUpLoad: {
+        type: Boolean,
+        default: false
+      }
+    },
     mounted() {
+
       this.scroll = new BScroll(this.$refs.scrollWrapper, {
-        probeType: 3,
-        pullUpLoad: true,
+        probeType: this.monitorScroll ? 3 : 0, // 当pullingDown启用时，永远是3
+        pullUpLoad: this.pullUpLoad,
         click: true
       });
 
-      this.scroll.on("pullingDown", () => {
-        window.setTimeout(() => {
-          this.scroll.finishPullDown();
-        }, 1000);
+      // 监听上拉加载更多
+      this.scroll.on("pullingUp", () => {
+        this.$emit("pullingUp");
       })
+
+      // 监听滚动事件
+      this.scroll.on("scroll", (position) => {
+        this.$emit("scroll", position);
+      })
+    },
+    methods: {
+      scrollTo(x, y, duration) {
+        this.scroll.scrollTo(x, y, duration);
+      },
+      finishPullUp() {
+        this.scroll.finishPullUp();
+      },
+      refresh() {
+        this.scroll.refresh();
+      }
     }
   }
 </script>

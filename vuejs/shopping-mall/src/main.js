@@ -11,6 +11,9 @@ Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false
 
+// 创建一个事件总线
+Vue.prototype.$bus = new Vue();
+
 new Vue({
   render: h => h(App),
   router

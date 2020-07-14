@@ -3,13 +3,18 @@
     <nav-bar class="home-navbar">
       <div slot="center">购物街</div>
     </nav-bar>
-    <scroll class="scroll-content">
+    <scroll class="scroll-content" ref="scroll"
+            :monitorScroll="true"
+            @scroll="contentScroll"
+            :pull-up-load="true"
+            @pullingUp="loadMore">
       <!--    <home-swiper/>-->
       <home-carousel/>
       <home-recommand/>
       <tab-control :titles="['流行', '新款', '精选']" @click-tab="tabControlClick"/>
       <goods-list :goods="showGoods"/>
     </scroll>
+    <back-top @click.native="backTopClick" v-show="showBackTop"/>
   </div>
 
 </template>
@@ -19,6 +24,7 @@
   import TabControl from "components/content/tabcontrol/TabControl";
   import GoodsList from "components/content/goods/GoodsList";
   import Scroll from "components/common/scroll/Scroll";
+  import BackTop from "components/content/backtop/BackTop";
 
   import HomeCarousel from "./comp/HomeCarousel";
   import HomeSwiper from "./comp/HomeSwiper";
@@ -64,6 +70,125 @@
                 cfav: 19,
                 price: 199.99
               }
+              ,
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop3.84609577.webp'
+                },
+                title: 'title3',
+                cfav: 19,
+                price: 199.99
+              },
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
+                },
+                title: 'title4',
+                cfav: 19,
+                price: 199.99
+              }
+              ,
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop3.84609577.webp'
+                },
+                title: 'title3',
+                cfav: 19,
+                price: 199.99
+              },
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
+                },
+                title: 'title4',
+                cfav: 19,
+                price: 199.99
+              }
+              ,
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop3.84609577.webp'
+                },
+                title: 'title3',
+                cfav: 19,
+                price: 199.99
+              },
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
+                },
+                title: 'title4',
+                cfav: 19,
+                price: 199.99
+              }
+              ,
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop3.84609577.webp'
+                },
+                title: 'title3',
+                cfav: 19,
+                price: 199.99
+              },
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
+                },
+                title: 'title4',
+                cfav: 19,
+                price: 199.99
+              }
+              ,
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop3.84609577.webp'
+                },
+                title: 'title3',
+                cfav: 19,
+                price: 199.99
+              },
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
+                },
+                title: 'title4',
+                cfav: 19,
+                price: 199.99
+              }
+              ,
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop3.84609577.webp'
+                },
+                title: 'title3',
+                cfav: 19,
+                price: 199.99
+              },
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
+                },
+                title: 'title4',
+                cfav: 19,
+                price: 199.99
+              }
+              ,
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop3.84609577.webp'
+                },
+                title: 'title3',
+                cfav: 19,
+                price: 199.99
+              },
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
+                },
+                title: 'title4',
+                cfav: 19,
+                price: 199.99
+              }
             ]
           },
           brandnew: {
@@ -86,8 +211,17 @@
           },
           feature: {page: 0, list: []}
         },
-        currentGoodsType: 'popular'
+        currentGoodsType: 'popular',
+        showBackTop: false
       }
+    },
+    created() {
+      console.log("loading data from network...")
+    },
+    mounted() {
+      this.$bus.$on("imgLoaded", () => {
+        this.$refs.scroll.refresh();
+      })
     },
     computed: {
       showGoods() {
@@ -95,6 +229,7 @@
       }
     },
     components: {
+      BackTop,
       Scroll,
       GoodsList,
       TabControl,
@@ -116,6 +251,27 @@
             this.currentGoodsType = 'feature';
             break;
         }
+      },
+      backTopClick() {
+        this.$refs.scroll.scrollTo(0, 0, 500);
+      },
+      contentScroll(position) {
+        this.showBackTop = (-position.y) > 800 ? true : false;
+      },
+
+      /**
+       * 当滚动到最底下的位置时，模拟加载更多数据
+       */
+      loadMore() {
+        new Promise((resolve, reject) => {
+          setTimeout(() => {
+            console.log("loading more data...")
+            resolve("pseude data");
+          }, 1000)
+        }).then(res => {
+          console.log("pseudo data is loaded")
+          this.$refs.scroll.finishPullUp();
+        })
       }
     }
   }
