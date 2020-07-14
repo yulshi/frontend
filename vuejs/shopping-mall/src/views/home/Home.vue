@@ -3,11 +3,13 @@
     <nav-bar class="home-navbar">
       <div slot="center">购物街</div>
     </nav-bar>
-<!--    <home-swiper/>-->
-    <home-carousel/>
-    <home-recommand/>
-    <tab-control :titles="['流行', '新款', '精选']" @click-tab="tabControlClick"/>
-    <goods-list :goods="showGoods"/>
+    <scroll class="scroll-content">
+      <!--    <home-swiper/>-->
+      <home-carousel/>
+      <home-recommand/>
+      <tab-control :titles="['流行', '新款', '精选']" @click-tab="tabControlClick"/>
+      <goods-list :goods="showGoods"/>
+    </scroll>
   </div>
 
 </template>
@@ -16,6 +18,7 @@
   import NavBar from "components/common/navbar/NavBar";
   import TabControl from "components/content/tabcontrol/TabControl";
   import GoodsList from "components/content/goods/GoodsList";
+  import Scroll from "components/common/scroll/Scroll";
 
   import HomeCarousel from "./comp/HomeCarousel";
   import HomeSwiper from "./comp/HomeSwiper";
@@ -92,6 +95,7 @@
       }
     },
     components: {
+      Scroll,
       GoodsList,
       TabControl,
       NavBar,
@@ -119,8 +123,9 @@
 
 <style scoped>
   #home {
-    margin-bottom: 60px;
-    margin-top: 44px
+    padding-top: 44px;
+    padding-bottom: 0;
+    height: 100vh;
   }
 
   .home-navbar {
@@ -130,5 +135,10 @@
     top: 0;
     z-index: 9999;
     width: 100%;
+  }
+
+  .scroll-content {
+    overflow: auto;
+    height: calc(100% - 49px);
   }
 </style>
