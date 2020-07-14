@@ -3,9 +3,11 @@
     <nav-bar class="home-navbar">
       <div slot="center">购物街</div>
     </nav-bar>
-    <home-swiper></home-swiper>
+<!--    <home-swiper/>-->
+    <home-carousel/>
     <home-recommand/>
     <tab-control :titles="['流行', '新款', '精选']" @click-tab="tabControlClick"/>
+    <goods-list :goods="showGoods"/>
   </div>
 
 </template>
@@ -13,6 +15,7 @@
 <script>
   import NavBar from "components/common/navbar/NavBar";
   import TabControl from "components/content/tabcontrol/TabControl";
+  import GoodsList from "components/content/goods/GoodsList";
 
   import HomeCarousel from "./comp/HomeCarousel";
   import HomeSwiper from "./comp/HomeSwiper";
@@ -23,13 +26,73 @@
     data() {
       return {
         goods: {
-          popular: {page: 0, list: []},
-          brandnew: {page: 0, list: []},
+          popular: {
+            page: 1,
+            list: [
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop1.2014062d.webp'
+                },
+                title: 'title1',
+                cfav: 62,
+                price: 99.99
+              },
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop2.9ce1a997.webp'
+                },
+                title: 'title2',
+                cfav: 0,
+                price: 299.99
+              },
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop3.84609577.webp'
+                },
+                title: 'title3',
+                cfav: 19,
+                price: 199.99
+              },
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
+                },
+                title: 'title4',
+                cfav: 19,
+                price: 199.99
+              }
+            ]
+          },
+          brandnew: {
+            page: 1, list: [{
+              show: {
+                img: 'http://localhost:8080/img/loop1.2014062d.webp'
+              },
+              title: 'title1',
+              cfav: 62,
+              price: 99.99
+            },
+              {
+                show: {
+                  img: 'http://localhost:8080/img/loop2.9ce1a997.webp'
+                },
+                title: 'title2',
+                cfav: 0,
+                price: 299.99
+              }]
+          },
           feature: {page: 0, list: []}
-        }
+        },
+        currentGoodsType: 'popular'
+      }
+    },
+    computed: {
+      showGoods() {
+        return this.goods[this.currentGoodsType].list
       }
     },
     components: {
+      GoodsList,
       TabControl,
       NavBar,
       HomeRecommand,
@@ -38,7 +101,17 @@
     },
     methods: {
       tabControlClick(index) {
-        console.log("the selected tab-control index is", index);
+        switch (index) {
+          case 0:
+            this.currentGoodsType = 'popular'
+            break;
+          case 1:
+            this.currentGoodsType = 'brandnew';
+            break;
+          case 2:
+            this.currentGoodsType = 'feature';
+            break;
+        }
       }
     }
   }

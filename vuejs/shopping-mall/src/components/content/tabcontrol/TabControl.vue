@@ -47,6 +47,8 @@
     font-size: 15px;
     background-color: #fff;
     position: sticky;
+    top: 44px;
+    height: 44px;
   }
 
   .tab-control-item {

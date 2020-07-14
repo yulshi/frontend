@@ -1,15 +1,23 @@
 <template>
   <div id="carousel">
-    <div class="carousel-items-wrapper" :style="slideLeft">
+    <div class="carousel-items-wrapper" :style="itemsWrapperStyle">
       <slot></slot>
     </div>
-    <ul v-if="!noIndicator" class="indicator">
+    <ul v-if="showIndicator" class="indicator">
       <li v-for="count in numOfItems">
         <a href="javascript:;"
            @click="clickIndicator(count-1)"
-           :class="{active: currentIndex == count - 1}"></a>
+           :class="{active: currentIndex === count - 1}"></a>
       </li>
     </ul>
+    <div class="left-arrow" @click="slideToLeftByOne">
+      <span></span>
+      <span></span>
+    </div>
+    <div class="right-arrow" @click="slideToRightByOne">
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </template>
 
@@ -18,12 +26,12 @@
     name: "Carousel",
     data() {
       return {
-        left: 0,
-        numOfItems: 0,
         loopTimer: null,
         slideTimer: null,
+        numOfItems: 0,
         currentIndex: 0,
-        width: 300
+        itemWidth: 300,
+        itemsWrapperStyle: {},
       }
     },
     props: {
@@ -31,82 +39,82 @@
         type: Number,
         default: 2000
       },
-      slideInterval: {
-        type: Number,
-        default: 30
-      },
-      noIndicator: {
+      showIndicator: {
         type: Boolean,
-        default: false
+        default: true
+      },
+      animationDuration: {
+        type: Number,
+        default: 0.5
       }
     },
-    computed: {
-      slideLeft() {
-        if (this.left <= -(this.numOfItems) * 300) {
-          this.left = 0;
-        }
-        return {'left': this.left + "px"}
-      }
-    },
-    created() {
-      this.autoSlide();
-    },
+    computed: {},
     beforeDestroy() {
       clearInterval(this.loopTimer)
       clearInterval(this.slideTimer)
     },
     mounted() {
-      this.numOfItems = this.$children.length;
-      const carouselItemWrapper = document.querySelector('.carousel-items-wrapper');
-      const carouselItems = document.querySelectorAll('.carousel-item');
-      if(carouselItems.length > 1) {
-        const firstItem = carouselItems[0].cloneNode(true);
-        // const lastItem = carouselItems[carouselItems.length - 1].cloneNode(true);
-        carouselItemWrapper.appendChild(firstItem);
-      }
+      this.init();
+      this.autoSlide();
     },
     methods: {
 
-      moveTo(destinationIndex) {
-
-        if (destinationIndex > this.numOfItems) {
-          this.currentIndex = 0;
-          destinationIndex = 1;
+      init() {
+        const carouselItemWrapper = document.querySelector('.carousel-items-wrapper');
+        this.itemWidth = carouselItemWrapper.offsetWidth;
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        this.numOfItems = carouselItems.length;
+        if (carouselItems.length > 1) {
+          const firstItemClone = carouselItems[0].cloneNode(true);
+          const lastItemClone = carouselItems[carouselItems.length - 1].cloneNode(true);
+          carouselItemWrapper.appendChild(firstItemClone);
+          carouselItemWrapper.insertBefore(lastItemClone, carouselItems[0]);
         }
+        this.itemsWrapperStyle = {
+          transform: `translateX(${-1 * this.itemWidth + 'px'})`
+        }
+      },
 
-        const from = -this.width * this.currentIndex;
-        const to = -this.width * destinationIndex;
-        const distance = to - from;
-        const step = distance / this.slideInterval;
+      /**
+       * Move to the item with the specified index
+       * @param index
+       */
+      moveTo(index) {
+        this.itemsWrapperStyle = {
+          transition: `transform ${this.animationDuration}s`,
+          transform: `translateX(${-(1 + index) * this.itemWidth + 'px'})`
+        }
+        this.currentIndex = index;
 
-        clearInterval(this.slideTimer)
-
-        this.slideTimer = setInterval(() => {
-
-          let newValue = this.left + step;
-          if (distance > 0 && newValue >= to || distance < 0 && newValue <= to) {
-            newValue = to;
-          }
-
-          this.left = newValue;
-
-          if (this.left == to) {
-            clearInterval(this.slideTimer);
-            this.currentIndex = destinationIndex;
-            if(this.currentIndex == this.numOfItems) {
-              this.currentIndex = 0;
+        // 校准位置，必须使用setTimeout来延迟执行
+        setTimeout(() => {
+          this.itemsWrapperStyle.transition = '0s'
+          if (index < 0) {
+            this.currentIndex = this.numOfItems - 1;
+            this.itemsWrapperStyle = {
+              transform: `translateX(${-this.numOfItems * this.itemWidth + 'px'})`
+            }
+          } else if (index >= this.numOfItems) {
+            this.currentIndex = 0;
+            this.itemsWrapperStyle = {
+              transform: `translateX(${-this.itemWidth + 'px'})`
             }
           }
-        }, this.slideInterval)
-
+        }, this.animationDuration * 1000)
       },
 
       clickIndicator(index) {
         this.moveTo(index);
         clearInterval(this.loopTimer)
-        setTimeout(() => {
-          this.autoSlide()
-        }, this.stopInterval)
+        this.autoSlide()
+      },
+
+      slideToLeftByOne() {
+        this.clickIndicator(this.currentIndex - 1);
+      },
+
+      slideToRightByOne() {
+        this.clickIndicator(this.currentIndex + 1);
       },
 
       autoSlide() {
@@ -122,18 +130,13 @@
 <style scoped>
   #carousel {
     position: relative;
-    width: 300px;
-    height: 300px;
     overflow: hidden;
   }
 
   .carousel-items-wrapper {
     background-color: #000;
-    width: 300px;
     display: flex;
     flex-flow: row nowrap;
-    position: absolute;
-    left: -600px;
   }
 
   ul {
@@ -168,6 +171,67 @@
 
   .indicator li a.active {
     background-color: #000;
+  }
+
+  #carousel .left-arrow,
+  #carousel .right-arrow {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    z-index: 999;
+  }
+
+  #carousel .left-arrow:hover,
+  #carousel .right-arrow:hover {
+    background-color: rgba(0, 0, 0, .5);
+  }
+
+  #carousel .left-arrow {
+    left: 0;
+  }
+
+  #carousel .left-arrow span,
+  #carousel .right-arrow span {
+    display: block;
+    background-color: #ff0;
+    height: 2px;
+    width: 70%;
+    position: absolute;
+  }
+
+  #carousel .left-arrow span:first-of-type {
+    top: 0;
+    transform: rotateZ(-45deg);
+    transform-origin: right;
+  }
+
+  #carousel .left-arrow span:last-of-type {
+    bottom: 0;
+    transform: rotateZ(45deg);
+    transform-origin: right;
+  }
+
+  #carousel .right-arrow {
+    right: 0;
+  }
+
+  #carousel .right-arrow span {
+    right: 0;
+  }
+
+  #carousel .right-arrow span:first-of-type {
+    top: 0;
+    transform: rotateZ(45deg);
+    transform-origin: left;
+  }
+
+  #carousel .right-arrow span:last-of-type {
+    bottom: 0;
+    transform: rotateZ(-45deg);
+    transform-origin: left;
   }
 
 </style>
