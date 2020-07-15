@@ -30,6 +30,8 @@
   import HomeSwiper from "./comp/HomeSwiper";
   import HomeRecommand from "./comp/HomeRecommand";
 
+  import {debounce, throttle} from "../../common/utils";
+
   export default {
     name: "Home",
     data() {
@@ -219,8 +221,9 @@
       console.log("loading data from network...")
     },
     mounted() {
+      const refresh = debounce(this.$refs.scroll.refresh, 300);
       this.$bus.$on("imgLoaded", () => {
-        this.$refs.scroll.refresh();
+        refresh();
       })
     },
     computed: {

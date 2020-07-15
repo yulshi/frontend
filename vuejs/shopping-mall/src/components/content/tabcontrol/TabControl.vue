@@ -45,10 +45,8 @@
     flex-flow: row nowrap;
     text-align: center;
     font-size: 15px;
-    background-color: #fff;
-    position: sticky;
-    top: 44px;
-    height: 44px;
+    background-color: #bfa;
+    line-height: 44px;
   }
 
   .tab-control-item {
