@@ -3,15 +3,24 @@
     <nav-bar class="home-navbar">
       <div slot="center">购物街</div>
     </nav-bar>
+    <tab-control
+      :titles="['流行', '新款', '精选']"
+      @click-tab="tabControlClick"
+      class="tab-control-placeholder"
+      v-show="tabControlfixed"
+      ref="placeHolderTabControl"/>
     <scroll class="scroll-content" ref="scroll"
             :monitorScroll="true"
             @scroll="contentScroll"
             :pull-up-load="true"
             @pullingUp="loadMore">
       <!--    <home-swiper/>-->
-      <home-carousel/>
-      <home-recommand/>
-      <tab-control :titles="['流行', '新款', '精选']" @click-tab="tabControlClick"/>
+      <home-carousel @imgLoaded="carouselImgLoaded"/>
+      <home-recommand @imgLoaded="recommandImgLoaded"/>
+      <tab-control
+        :titles="['流行', '新款', '精选']"
+        @click-tab="tabControlClick"
+        ref="scrolledTabControl"/>
       <goods-list :goods="showGoods"/>
     </scroll>
     <back-top @click.native="backTopClick" v-show="showBackTop"/>
@@ -214,7 +223,9 @@
           feature: {page: 0, list: []}
         },
         currentGoodsType: 'popular',
-        showBackTop: false
+        showBackTop: false,
+        tabControlfixed: false,
+        tabControlOffsetTop: 0
       }
     },
     created() {
@@ -254,12 +265,23 @@
             this.currentGoodsType = 'feature';
             break;
         }
+        this.$refs.placeHolderTabControl.currentIndex = index;
+        this.$refs.scrolledTabControl.currentIndex = index;
+      },
+      carouselImgLoaded() {
+        const tabControlElement = this.$refs.scrolledTabControl.$el;
+        this.tabControlOffsetTop = tabControlElement.offsetTop - tabControlElement.offsetHeight;
+        // console.log(this.tabControlOffsetTop)
+      },
+      recommandImgLoaded() {
+        this.carouselImgLoaded();
       },
       backTopClick() {
         this.$refs.scroll.scrollTo(0, 0, 500);
       },
       contentScroll(position) {
         this.showBackTop = (-position.y) > 800 ? true : false;
+        this.tabControlfixed = -position.y >= this.tabControlOffsetTop ? true : false;
       },
 
       /**
@@ -282,7 +304,7 @@
 
 <style scoped>
   #home {
-    padding-top: 44px;
+    /*padding-top: 44px;*/
     padding-bottom: 0;
     height: 100vh;
   }
@@ -290,14 +312,20 @@
   .home-navbar {
     background-color: var(--color-tint);
     color: #ffffff;
-    position: fixed;
-    top: 0;
-    z-index: 9999;
-    width: 100%;
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*z-index: 9999;*/
+    /*width: 100%;*/
   }
 
   .scroll-content {
     overflow: auto;
     height: calc(100% - 49px);
+  }
+
+  .tab-control-placeholder {
+    position: absolute;
+    z-index: 999;
+    width: 100%;
   }
 </style>

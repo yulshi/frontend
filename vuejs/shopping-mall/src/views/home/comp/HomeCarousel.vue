@@ -3,7 +3,7 @@
     <carousel>
       <carousel-item>
         <a href="javascript:;">
-          <img src="~assets/img/carousel/loop1.webp">
+          <img src="~assets/img/carousel/loop1.webp" @load="imgLoaded">
         </a>
       </carousel-item>
       <carousel-item>
@@ -32,11 +32,17 @@
 
 <script>
   import {Carousel, CarouselItem} from "components/common/carousel";
+
   export default {
     name: "HomeCarousel",
     components: {
       Carousel,
       CarouselItem
+    },
+    methods: {
+      imgLoaded() {
+        this.$emit('imgLoaded');
+      }
     }
   }
 </script>

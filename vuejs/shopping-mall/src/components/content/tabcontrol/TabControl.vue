@@ -45,7 +45,7 @@
     flex-flow: row nowrap;
     text-align: center;
     font-size: 15px;
-    background-color: #bfa;
+    background-color: #fff;
     line-height: 44px;
   }
 
