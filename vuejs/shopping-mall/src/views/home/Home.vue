@@ -225,7 +225,8 @@
         currentGoodsType: 'popular',
         showBackTop: false,
         tabControlfixed: false,
-        tabControlOffsetTop: 0
+        tabControlOffsetTop: 0,
+        currentScrollY: 0
       }
     },
     created() {
@@ -236,6 +237,13 @@
       this.$bus.$on("imgLoaded", () => {
         refresh();
       })
+    },
+    activated() {
+      this.$refs.scroll.refresh();
+      this.$refs.scroll.scrollTo(0, this.currentScrollY, 0);
+    },
+    deactivated() {
+      this.currentScrollY = this.$refs.scroll.getPositionY();
     },
     computed: {
       showGoods() {
