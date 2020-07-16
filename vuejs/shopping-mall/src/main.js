@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from './store'
 import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faHome, faUser} from "@fortawesome/free-solid-svg-icons";
@@ -16,5 +17,6 @@ Vue.prototype.$bus = new Vue();
 
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')

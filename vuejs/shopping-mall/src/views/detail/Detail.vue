@@ -11,7 +11,7 @@
       <product-recommand ref="productRecommand"/>
     </scroll>
     <back-top @click.native="backTopClick" v-show="showBackTop"/>
-    <detail-bottom-bar/>
+    <detail-bottom-bar @addToCart="addToCart"/>
   </div>
 </template>
 
@@ -72,6 +72,14 @@
             this.$refs.navbar.currentIndex = this.currentTitleIndex;
           }
         }
+      },
+      addToCart() {
+        const product = {
+          pid: this.pid,
+          title: 'product-' + Date.now(),
+          price: Math.round(Math.random() * 100),
+        }
+        this.$store.dispatch('addToCart', product)
       }
     }
   }
