@@ -33,13 +33,13 @@
   import TabControl from "components/content/tabcontrol/TabControl";
   import GoodsList from "components/content/goods/GoodsList";
   import Scroll from "components/common/scroll/Scroll";
-  import BackTop from "components/content/backtop/BackTop";
 
   import HomeCarousel from "./comp/HomeCarousel";
   import HomeSwiper from "./comp/HomeSwiper";
   import HomeRecommand from "./comp/HomeRecommand";
 
   import {debounce, throttle} from "../../common/utils";
+  import {backTopMixin} from '../../common/mixin';
 
   export default {
     name: "Home",
@@ -223,7 +223,6 @@
           feature: {page: 0, list: []}
         },
         currentGoodsType: 'popular',
-        showBackTop: false,
         tabControlfixed: false,
         tabControlOffsetTop: 0,
         currentScrollY: 0
@@ -251,7 +250,6 @@
       }
     },
     components: {
-      BackTop,
       Scroll,
       GoodsList,
       TabControl,
@@ -260,6 +258,7 @@
       HomeSwiper,
       HomeCarousel
     },
+    mixins: [backTopMixin],
     methods: {
       tabControlClick(index) {
         switch (index) {
@@ -284,11 +283,8 @@
       recommandImgLoaded() {
         this.carouselImgLoaded();
       },
-      backTopClick() {
-        this.$refs.scroll.scrollTo(0, 0, 500);
-      },
       contentScroll(position) {
-        this.showBackTop = (-position.y) > 800 ? true : false;
+        this.onBackTop(position)
         this.tabControlfixed = -position.y >= this.tabControlOffsetTop ? true : false;
       },
 

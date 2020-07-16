@@ -11,6 +11,7 @@
       <product-recommand ref="productRecommand"/>
     </scroll>
     <back-top @click.native="backTopClick" v-show="showBackTop"/>
+    <detail-bottom-bar/>
   </div>
 </template>
 
@@ -21,12 +22,13 @@
   import ProductComments from "./comp/ProductComments";
   import ProductRecommand from "./comp/ProductRecommand";
   import Scroll from "components/common/scroll/Scroll";
-  import BackTop from "../../components/content/backtop/BackTop";
+  import {backTopMixin} from "../../common/mixin";
+  import DetailBottomBar from "./comp/DetailBottomBar";
 
   export default {
     name: "Detail",
     components: {
-      BackTop,
+      DetailBottomBar,
       Scroll,
       ProductRecommand,
       ProductComments,
@@ -37,7 +39,6 @@
     data() {
       return {
         pid: null,
-        showBackTop: false,
         offsetTops: [],
         currentTitleIndex: 0
       }
@@ -55,15 +56,13 @@
       this.offsetTops.push(this.$refs.productRecommand.$el.offsetTop - 44)
       this.offsetTops.push(Number.MAX_VALUE)
     },
+    mixins: [backTopMixin],
     methods: {
       titleClick(index) {
         this.$refs.scroll.scrollTo(0, -(this.offsetTops[index]), 500);
       },
-      backTopClick() {
-        this.$refs.scroll.scrollTo(0, 0, 500);
-      },
       processScroll(position) {
-        this.showBackTop = position.y < -500
+        this.onBackTop(position);
         // 当滚动到某个主题时，对应的标题高亮显示
         const y = -position.y;
         for (let i = 0; i < this.offsetTops.length - 1; i++) {
@@ -87,7 +86,7 @@
   }
 
   .scroll-content {
-    height: calc(100% - 44px);
+    height: calc(100% - 44px - 64px);
     overflow: hidden;
   }
 </style>
