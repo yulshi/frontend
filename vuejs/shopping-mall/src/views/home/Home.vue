@@ -86,7 +86,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop3.84609577.webp'
                 },
-                title: 'title3',
+                title: 'title5',
                 cfav: 19,
                 price: 199.99
               },
@@ -94,7 +94,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
                 },
-                title: 'title4',
+                title: 'title6',
                 cfav: 19,
                 price: 199.99
               }
@@ -103,7 +103,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop3.84609577.webp'
                 },
-                title: 'title3',
+                title: 'title7',
                 cfav: 19,
                 price: 199.99
               },
@@ -111,7 +111,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
                 },
-                title: 'title4',
+                title: 'title8',
                 cfav: 19,
                 price: 199.99
               }
@@ -120,7 +120,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop3.84609577.webp'
                 },
-                title: 'title3',
+                title: 'title9',
                 cfav: 19,
                 price: 199.99
               },
@@ -128,7 +128,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
                 },
-                title: 'title4',
+                title: 'title10',
                 cfav: 19,
                 price: 199.99
               }
@@ -137,7 +137,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop3.84609577.webp'
                 },
-                title: 'title3',
+                title: 'title11',
                 cfav: 19,
                 price: 199.99
               },
@@ -145,7 +145,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
                 },
-                title: 'title4',
+                title: 'title12',
                 cfav: 19,
                 price: 199.99
               }
@@ -154,7 +154,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop3.84609577.webp'
                 },
-                title: 'title3',
+                title: 'title13',
                 cfav: 19,
                 price: 199.99
               },
@@ -162,7 +162,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
                 },
-                title: 'title4',
+                title: 'title14',
                 cfav: 19,
                 price: 199.99
               }
@@ -171,7 +171,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop3.84609577.webp'
                 },
-                title: 'title3',
+                title: 'title15',
                 cfav: 19,
                 price: 199.99
               },
@@ -179,7 +179,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
                 },
-                title: 'title4',
+                title: 'title16',
                 cfav: 19,
                 price: 199.99
               }
@@ -188,7 +188,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop3.84609577.webp'
                 },
-                title: 'title3',
+                title: 'title17',
                 cfav: 19,
                 price: 199.99
               },
@@ -196,7 +196,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop4.b1b7f58a.webp'
                 },
-                title: 'title4',
+                title: 'title18',
                 cfav: 19,
                 price: 199.99
               }
@@ -207,7 +207,7 @@
               show: {
                 img: 'http://localhost:8080/img/loop1.2014062d.webp'
               },
-              title: 'title1',
+              title: 'title19',
               cfav: 62,
               price: 99.99
             },
@@ -215,7 +215,7 @@
                 show: {
                   img: 'http://localhost:8080/img/loop2.9ce1a997.webp'
                 },
-                title: 'title2',
+                title: 'title20',
                 cfav: 0,
                 price: 299.99
               }]
