@@ -8,17 +8,7 @@
   import Scroll from "components/common/scroll/Scroll";
 
   export default {
-    name: "BackTop",
-    props: {
-      scroll: {
-        type: Scroll,
-        default: null
-      },
-      duration: {
-        type: Number,
-        default: 500
-      }
-    }
+    name: "BackTop"
   }
 </script>
 
