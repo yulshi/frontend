@@ -30,15 +30,9 @@
     },
     computed: {
       checked() {
-        if (this.itemList.length === 0) return false;
-        let allChecked = true;
-        for (let item of this.itemList) {
-          if (!item.checked) {
-            allChecked = false;
-            break;
-          }
-        }
-        return allChecked;
+        // if (this.itemList.length === 0) return false;
+        // return !this.itemList.find(item => !item.checked)
+        return !!this.itemList.filter(item => item.checked).length
       },
       summary() {
         return this.itemList.filter(item => item.checked)
