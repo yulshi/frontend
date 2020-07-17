@@ -1,7 +1,7 @@
 <template>
   <div class="cart-list-item">
-    <div class="check-wrapper">
-      <check-button :active="checked" @checkClick="checkClick"/>
+    <div class="check-wrapper" @click="checkClick">
+      <check-button :checked="checked"/>
     </div>
     <div class="item-wrapper">
       <img src="~assets/img/carousel/loop4.webp">
@@ -19,14 +19,10 @@
 
 <script>
   import CheckButton from "components/content/check-button/CheckButton";
+
   export default {
     name: "ProductListItem",
     components: {CheckButton},
-    data() {
-      return {
-        checked: false
-      }
-    },
     props: {
       item: {
         type: Object,
@@ -35,14 +31,19 @@
         }
       }
     },
+    computed: {
+      checked() {
+        return this.item.checked
+      }
+    },
     filters: {
       currency(value) {
-        return '¥ ' + value
+        return '¥ ' + value.toFixed(2)
       }
     },
     methods: {
       checkClick() {
-        this.checked = !this.checked
+        this.item.checked = !this.item.checked
       }
     }
   }
@@ -53,7 +54,7 @@
   .cart-list-item {
     display: flex;
     padding: 10px 0;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid #ddd;
   }
 
   .check-wrapper {

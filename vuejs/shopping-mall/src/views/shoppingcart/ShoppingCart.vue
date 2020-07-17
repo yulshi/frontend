@@ -8,6 +8,7 @@
     <scroll class="scroll-content" ref="scroll">
       <product-list :item-list="productsInCart"/>
     </scroll>
+    <bottom-bar :item-list="productsInCart"/>
   </div>
 </template>
 
@@ -16,10 +17,12 @@
   import {mapGetters} from 'vuex';
   import Scroll from "../../components/common/scroll/Scroll";
   import ProductList from "./comp/ProductList";
+  import BottomBar from "./comp/BottomBar";
 
   export default {
     name: "ShoppingCart",
     components: {
+      BottomBar,
       ProductList,
       Scroll,
       NavBar
@@ -31,7 +34,6 @@
       ])
     },
     activated() {
-      console.log('----')
       this.$refs.scroll.refresh();
     }
   }
@@ -49,7 +51,7 @@
   }
 
   .scroll-content {
-    height: calc(100% - 44px - 49px);
+    height: calc(100% - 44px - 49px - 40px);
     overflow: hidden;
   }
 

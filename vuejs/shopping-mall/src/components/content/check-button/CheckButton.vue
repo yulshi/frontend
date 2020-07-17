@@ -1,7 +1,5 @@
 <template>
-  <div class="check-button"
-       :class="{active: active}"
-       @click="checkClick">
+  <div class="check-button" :class="{active: checked}">
     <img src="~assets/img/cart/tick.svg" alt="tick">
   </div>
 </template>
@@ -10,14 +8,9 @@
   export default {
     name: "CheckButton",
     props: {
-      active: {
+      checked: {
         type: Boolean,
         default: false
-      }
-    },
-    methods: {
-      checkClick() {
-        this.$emit('checkClick')
       }
     }
   }
@@ -26,8 +19,8 @@
 <style scoped>
 
   .check-button {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     margin: 4px;
     border-radius: 50%;
     border: 2px solid #aaa;
@@ -35,7 +28,6 @@
 
   .check-button img {
     width: 100%;
-    vertical-align: middle;
   }
 
   .check-button.active {
