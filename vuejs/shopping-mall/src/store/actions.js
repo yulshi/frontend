@@ -5,11 +5,16 @@ import {
 
 export default {
   addToCart({state, commit}, payload) {
-    var prod = state.cartProductList.find(item => item.pid === payload.pid);
-    if (prod) {
-      commit(INCREMENT_IN_CART, payload);
-    } else {
-      commit(ADD_TO_CART, payload);
-    }
+    return new Promise((resolve, reject) => {
+      var prod = state.cartProductList.find(item => item.pid === payload.pid);
+      if (prod) {
+        commit(INCREMENT_IN_CART, payload);
+        resolve("为已添加商品数量加1")
+      } else {
+        commit(ADD_TO_CART, payload);
+        resolve("增加新的商品")
+      }
+    })
+
   }
 }

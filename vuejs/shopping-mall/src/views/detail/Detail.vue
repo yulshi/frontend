@@ -79,7 +79,9 @@
           title: 'product-' + Date.now(),
           price: Math.round(Math.random() * 100),
         }
-        this.$store.dispatch('addToCart', product)
+        this.$store.dispatch('addToCart', product).then(res => {
+          this.$toast.show('已放入购物车');
+        })
       }
     }
   }
