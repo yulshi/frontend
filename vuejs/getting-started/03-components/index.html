@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Components</title>
+  <style type="text/css">
+    .msg {
+      background-color: #bfa;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <h2>{{title}}</h2>
+  <comp message="hellooooooo"/>
+</div>
+
+
+<template id="comp">
+  <div>
+    <p class="msg">{{message}}</p>
+    <h3>{{name}}</h3>
+    <button name="btn" :disabled="btnDisabled">Button</button>
+  </div>
+</template>
+
+
+<script src="../libs/vue.js"></script>
+<script>
+
+  const comp = Vue.component('comp', {
+    props: {
+      message: String
+    },
+    data: function () {
+      return {
+        name: 'Jimmy',
+        btnDisabled: true
+      }
+    },
+    template: '#comp'
+  })
+
+  const app = new Vue({
+    el: "#app",
+    data: {
+      title: "This is a title",
+      message: "Hello Vue!!"
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yesno</title>
+  <style>
+    .answer-wrapper img {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div>
+    ask a yes/no question:
+    <input type="text" v-model="question">
+  </div>
+  <div class="answer-wrapper">
+    <img :src="response.image"
+         v-if="response.image !== null"
+         :alt="response.answer"
+         :title="response.answer"/>
+    <span v-if="response.image === null">
+      {{response.answer}}
+    </span>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+<script src="../libs/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      question: '',
+      response: {
+        answer: '',
+        image: null
+      }
+    },
+    watch: {
+      question: _.debounce(function (newVal, oldVal) {
+        this.update(newVal, oldVal)
+      }, 200)
+    },
+    methods: {
+      fetchData() {
+        axios.get('https://yesno.wtf/api')
+            .then(res => {
+              this.response = res.data;
+            })
+            .catch(err => {
+              console.log(err);
+            });
+      },
+      update(newVal, oldVal) {
+        if (!this.question.endsWith('?')) {
+          this.response.answer = 'the question should be ended with ?'
+          this.response.image = null;
+        } else {
+          this.response.answer = 'thinking...'
+          this.response.image = null;
+          this.fetchData();
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>

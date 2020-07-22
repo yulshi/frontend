@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>v-bind.sync</title>
+</head>
+<body>
+
+<div id="app">
+<!--  <text-document :title="title" @change-title="title = $event"></text-document>-->
+  <text-document v-bind:title.sync="title"></text-document>
+  <div>{{title}}</div>
+</div>
+
+<script src="../libs/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    components: {
+      'text-document': {
+        name: 'text-document',
+        template: `
+          <div>
+          {{title}}<br>
+            <button @click="btnClick">change title</button>
+          </div>
+        `,
+        props: ['title'],
+        methods: {
+          btnClick: function (e) {
+            // 必须起名为 update:xxx
+            this.$emit('update:title', this.title + ' is updated')
+          }
+        }
+      }
+    },
+    data: {
+      title: 'Cool'
+    }
+  })
+</script>
+</body>
+</html>

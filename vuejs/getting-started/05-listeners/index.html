@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test $listeners</title>
+</head>
+<body>
+
+<div id="app">
+  <base-input label="Your name" v-model="value"/>
+</div>
+
+<template id="base-input">
+  <label>
+    {{label}}
+    <input type="text" v-bind="$attrs" :value="value" v-on="inputListeners">
+    <div>
+      {{value}}
+    </div>
+  </label>
+</template>
+
+<script src="../libs/vue.js"></script>
+<script>
+
+  Vue.component('base-input', {
+    template: '#base-input',
+    inheritAttrs: false,
+    props: ['label', 'value'],
+    computed: {
+      inputListeners: function () {
+        const vm = this;
+        return Object.assign({},
+            this.$listeners,
+            {
+              input: function (e) {
+                vm.$emit('input', e.target.value);
+              }
+            }
+        )
+      }
+    }
+  })
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      value: ''
+    }
+  })
+</script>
+</body>
+</html>

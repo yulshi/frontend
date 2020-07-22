@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slot</title>
+</head>
+<body>
+
+<div id="app">
+  <todo :todos="todos">
+    <template v-slot:default="{todoContent: todo}">
+      {{todo.title}}
+      <span v-if="todo.completed">✓</span>
+    </template>
+  </todo>
+</div>
+
+<template id="todo">
+  <ul class="todo-list">
+    <li v-for="todo in todos">
+      <slot :todo-content="todo">
+        {{todo.title}}
+      </slot>
+    </li>
+  </ul>
+</template>
+
+<script src="../libs/vue.js"></script>
+<script>
+
+  const app = new Vue({
+    el: '#app',
+    data: {
+      todos: [
+        {
+          id: 1,
+          title: 'make breakfast',
+          completed: false
+        },
+        {
+          id: 2,
+          title: 'clean room',
+          completed: true
+        },
+        {
+          id: 3,
+          title: 'study english',
+          completed: false
+        },
+        {
+          id: 4,
+          title: 'play outside',
+          completed: false
+        }
+      ]
+    },
+    components: {
+      todo: {
+        name: 'Todo',
+        template: '#todo',
+        props: {
+          todos: {
+            type: Array,
+            default: function () {
+              return []
+            }
+          }
+        }
+      }
+    }
+  })
+</script>
+</body>
+</html>
