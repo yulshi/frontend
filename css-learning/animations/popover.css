@@ -1,0 +1,30 @@
+.container {
+    position: absolute;
+    width: 240px;
+    border: 1px solid grey;
+    background-color: red;
+}
+
+.titleBar {
+    height: 30px;
+    display: flex;
+    background-color: skyblue;
+}
+
+.title {
+    font-size: 1.5em;
+}
+
+.close {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: 5px;
+    align-items: center;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.content {
+    min-height: 100px;
+    background-color: grey;
+}
